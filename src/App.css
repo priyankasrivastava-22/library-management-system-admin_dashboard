@@ -1,0 +1,31 @@
+.app {
+  display: flex;
+  font-family: Arial, sans-serif;
+}
+
+/* Main content next to sidebar */
+.main-content {
+  margin-left: 220px;
+  flex: 1;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  transition: all 0.3s ease;
+}
+
+/* Light Theme */
+.app.light {
+  --bg: #ffffff;
+  --text: #000000;
+}
+
+/* Dark Theme */
+.app.dark {
+  --bg: #121212;
+  --text: #f1f1f1;
+}
+
+/* Page content box */
+.page-content {
+  padding: 20px;
+}
