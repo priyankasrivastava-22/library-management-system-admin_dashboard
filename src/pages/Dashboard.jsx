@@ -7,46 +7,35 @@ export default function Dashboard() {
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [dateFilter, setDateFilter] = useState("");
 
-  useEffect(() => {
-    // Dummy data for testing
-    const dummyBooks = [
-      {
-        id: 1,
-        name: "Harry Potter",
-        author: "J.K. Rowling",
-        section: "Fiction",
-        category: "Fantasy",
-        stockAdded: 10,
-        issued: 5,
-        stockLeft: 5,
-        totalIssued: 12,
+ useEffect(() => {
+  fetch("http://localhost:5000/api/books")
+    .then((res) => res.json())
+    .then((data) => {
+      const formatted = data.map((b) => ({
+        id: b.id,
+        name: b.title,
+        author: b.author,
+        section: b.section,
+        category: b.category,
+        stockAdded: b.stock,
+        issued: 0,
+        stockLeft: b.stock,
+        totalIssued: 0,
         totalFine: 0,
-        date: "2025-09-08",
-        admin: "Admin1",
-      },
-      {
-        id: 2,
-        name: "Economics 101",
-        author: "Paul Samuelson",
-        section: "Study",
-        category: "Economics",
-        stockAdded: 5,
-        issued: 2,
-        stockLeft: 3,
-        totalIssued: 5,
-        totalFine: 0,
-        date: "2025-09-08",
-        admin: "Admin2",
-      },
-    ];
-    setBooks(dummyBooks);
-  }, []);
+        admin: "Admin",
+        date: new Date().toISOString().split("T")[0],
+      }));
 
-  // Filter books dynamically
-  const filteredBooks = books.filter((b) => 
-    (sectionFilter === "All" || b.section === sectionFilter) &&
-    (categoryFilter === "All" || b.category === categoryFilter) &&
-    (dateFilter === "" || b.date === dateFilter)
+      setBooks(formatted);
+    })
+    .catch((err) => console.error(err));
+}, []);
+
+  const filteredBooks = books.filter(
+    (b) =>
+      (sectionFilter === "All" || b.section === sectionFilter) &&
+      (categoryFilter === "All" || b.category === categoryFilter) &&
+      (dateFilter === "" || b.date === dateFilter)
   );
 
   const sections = ["All", "Fiction", "Non-Fiction", "Study"];
@@ -56,7 +45,6 @@ export default function Dashboard() {
     Study: ["All", "Mathematics", "Economics", "Physics", "Chemistry", "Biology", "Engineering", "Law"],
   };
 
-  // Summary boxes data
   const totalBooks = books.reduce((sum, b) => sum + b.stockAdded, 0);
   const totalIssuedToday = books.reduce((sum, b) => sum + b.issued, 0);
   const totalReturned = books.reduce((sum, b) => sum + (b.stockAdded - b.stockLeft), 0);
@@ -64,67 +52,44 @@ export default function Dashboard() {
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">📊 Admin Dashboard</h1>
+      <h1 className="dashboard-title">Admin Dashboard</h1>
 
-      {/* Filters */}
       <div className="section-category-filters">
         <div className="filter-group">
           <label>Section</label>
           <select value={sectionFilter} onChange={(e) => { setSectionFilter(e.target.value); setCategoryFilter("All"); }}>
-            {sections.map((s) => <option key={s} value={s}>{s}</option>)}
+            {sections.map((s) => <option key={s}>{s}</option>)}
           </select>
         </div>
 
         <div className="filter-group">
           <label>Category</label>
           <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
-            {(categories[sectionFilter] || ["All"]).map((c) => <option key={c} value={c}>{c}</option>)}
+            {(categories[sectionFilter] || ["All"]).map((c) => <option key={c}>{c}</option>)}
           </select>
         </div>
 
-        <div className="filter-group date-filter-container">
+        <div className="filter-group">
           <label>Date</label>
-          <input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} className="filter-input"/>
+          <input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} />
         </div>
       </div>
 
-      {/* Summary Boxes */}
       <div className="summary-boxes">
-        <div className="box">
-          <h3>Total Books in Library</h3>
-          <p>{totalBooks}</p>
-        </div>
-        <div className="box">
-          <h3>Total Books Issued Today</h3>
-          <p>{totalIssuedToday}</p>
-        </div>
-        <div className="box">
-          <h3>Total Books Returned</h3>
-          <p>{totalReturned}</p>
-        </div>
-        <div className="box">
-          <h3>Total Stock Left</h3>
-          <p>{totalStockLeft}</p>
-        </div>
+        <div className="box"><h3>Total Books</h3><p>{totalBooks}</p></div>
+        <div className="box"><h3>Issued Today</h3><p>{totalIssuedToday}</p></div>
+        <div className="box"><h3>Returned</h3><p>{totalReturned}</p></div>
+        <div className="box"><h3>Stock Left</h3><p>{totalStockLeft}</p></div>
       </div>
 
-      {/* Table */}
       <div className="table-container">
         <table>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Book Name</th>
-              <th>Author</th>
-              <th>Section</th>
-              <th>Category</th>
-              <th>Stock Added</th>
-              <th>Issued Today</th>
-              <th>Stock Left</th>
-              <th>Total Issued</th>
-              <th>Total Fine</th>
-              <th>Admin</th>
-              <th>Date</th>
+              <th>ID</th><th>Book Name</th><th>Author</th><th>Section</th>
+              <th>Category</th><th>Stock Added</th><th>Issued</th>
+              <th>Stock Left</th><th>Total Issued</th><th>Total Fine</th>
+              <th>Admin</th><th>Date</th>
             </tr>
           </thead>
           <tbody>

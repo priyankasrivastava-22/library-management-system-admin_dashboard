@@ -1,118 +1,134 @@
 import React, { useState, useEffect } from "react";
-import "../pages/Records.css";
 
-const sections = ["Fiction", "Non-Fiction", "Study"];
-const categories = {
-  Fiction: ["Fantasy", "Mystery", "Romance", "Thriller", "Historical", "Children", "Cook"],
-  "Non-Fiction": ["Biography", "Selfhelp", "History", "Science", "Philosophy", "Travel", "Truecrime"],
-  Study: ["Mathematics", "Economics", "Physics", "Chemistry", "Biology", "Engineering", "Law"],
-};
-
-export default function AddBookModal({ open, onClose, onSubmit }) {
+const AddBookModal = ({ onClose, onSubmit }) => {
   const [bookData, setBookData] = useState({
     name: "",
     author: "",
-    section: "",
-    category: "",
-    stockAdded: 1,
-    date: new Date().toISOString().slice(0, 10),
-    admin: "Admin",
+    section_id: "",
+    category_id: "",
+    stockAdded: ""
   });
 
-  // Reset form when modal opens/closes
-  useEffect(() => {
-    if (!open) {
-      setBookData({
-        name: "",
-        author: "",
-        section: "",
-        category: "",
-        stockAdded: 1,
-        date: new Date().toISOString().slice(0, 10),
-        admin: "Admin",
-      });
-    }
-  }, [open]);
+  const [sections, setSections] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [filteredCategories, setFilteredCategories] = useState([]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setBookData({ ...bookData, [name]: value });
+  useEffect(() => {
+    fetchSections();
+    fetchCategories();
+  }, []);
+
+  useEffect(() => {
+    if (bookData.section_id) {
+      const filtered = categories.filter(
+        (cat) => Number(cat.section_id) === Number(bookData.section_id)
+      );
+      setFilteredCategories(filtered);
+    }
+  }, [bookData.section_id, categories]);
+
+  const fetchSections = async () => {
+    const res = await fetch("http://localhost:5000/api/books/sections");
+    const data = await res.json();
+    setSections(data);
+  };
+
+  const fetchCategories = async () => {
+    const res = await fetch("http://localhost:5000/api/books/categories");
+    const data = await res.json();
+    setCategories(data);
   };
 
   const handleSectionChange = (e) => {
-    setBookData({ ...bookData, section: e.target.value, category: "" });
+    const sectionId = parseInt(e.target.value);
+
+    setBookData((prev) => ({
+      ...prev,
+      section_id: sectionId,
+      category_id: ""
+    }));
   };
 
-  const handleSubmit = () => {
-    if (!bookData.name || !bookData.author || !bookData.section || !bookData.category) {
-      alert("Please fill all fields");
-      return;
-    }
-    onSubmit(bookData);
-  };
+  const handleSubmit = async () => {
+    await fetch("http://localhost:5000/api/books", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        title: bookData.name,
+        author: bookData.author,
+        section_id: bookData.section_id,
+        category_id: bookData.category_id,
+        stock: bookData.stockAdded
+      })
+    });
 
-  // Only render modal if `open` is true
-  if (!open) return null;
+    onSubmit && onSubmit();
+    onClose();
+  };
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-box">
-        <h2>Add New Book</h2>
-        <div className="modal-form">
-          <label>Name</label>
-          <input name="name" value={bookData.name} onChange={handleChange} />
+    <div className="modal">
+      <h2>Add Book</h2>
 
-          <label>Author</label>
-          <input name="author" value={bookData.author} onChange={handleChange} />
+      <input
+        type="text"
+        placeholder="Book Name"
+        value={bookData.name}
+        onChange={(e) =>
+          setBookData({ ...bookData, name: e.target.value })
+        }
+      />
 
-          <label>Section</label>
-          <select value={bookData.section} onChange={handleSectionChange}>
-            <option value="">Select Section</option>
-            {sections.map((s) => (
-              <option key={s} value={s}>
-                {s}
-              </option>
-            ))}
-          </select>
+      <input
+        type="text"
+        placeholder="Author"
+        value={bookData.author}
+        onChange={(e) =>
+          setBookData({ ...bookData, author: e.target.value })
+        }
+      />
 
-          <label>Category</label>
-          <select
-            name="category"
-            value={bookData.category}
-            onChange={handleChange}
-            disabled={!bookData.section}
-          >
-            <option value="">Select Category</option>
-            {bookData.section &&
-              categories[bookData.section].map((c) => (
-                <option key={c} value={c}>
-                  {c}
-                </option>
-              ))}
-          </select>
+      <select value={bookData.section_id} onChange={handleSectionChange}>
+        <option value="">Select Section</option>
+        {sections.map((sec) => (
+          <option key={sec.id} value={sec.id}>
+            {sec.name}
+          </option>
+        ))}
+      </select>
 
-          <label>Copies / Stock Added</label>
-          <input
-            type="number"
-            name="stockAdded"
-            value={bookData.stockAdded}
-            onChange={handleChange}
-            min="1"
-          />
+      <select
+        value={bookData.category_id}
+        onChange={(e) =>
+          setBookData({
+            ...bookData,
+            category_id: parseInt(e.target.value)
+          })
+        }
+      >
+        <option value="">Select Category</option>
+        {filteredCategories.map((cat) => (
+          <option key={cat.id} value={cat.id}>
+            {cat.name}
+          </option>
+        ))}
+      </select>
 
-          <label>Date of Entry</label>
-          <input type="date" name="date" value={bookData.date} onChange={handleChange} />
+      <input
+        type="number"
+        placeholder="Stock"
+        value={bookData.stockAdded}
+        onChange={(e) =>
+          setBookData({ ...bookData, stockAdded: e.target.value })
+        }
+      />
 
-          <div className="modal-buttons">
-            <button className="btn-submit" onClick={handleSubmit}>
-              Add Book
-            </button>
-            <button className="btn-cancel" onClick={onClose}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      </div>
+      <button onClick={handleSubmit}>Add Book</button>
+      <button onClick={onClose}>Cancel</button>
     </div>
   );
-}
+};
+
+export default AddBookModal;

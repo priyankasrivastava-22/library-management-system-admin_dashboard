@@ -3,3 +3,4 @@ dist/
 .env
 # Ignore README temporarily
 README.md
+package-lock.json
