@@ -4,3 +4,4 @@ dist/
 # Ignore README temporarily
 README.md
 package-lock.json
+package.json
