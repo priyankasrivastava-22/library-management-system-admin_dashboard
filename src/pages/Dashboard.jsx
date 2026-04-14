@@ -8,7 +8,7 @@ export default function Dashboard() {
   const [dateFilter, setDateFilter] = useState("");
 
  useEffect(() => {
-  fetch("http://localhost:5000/api/books")
+  fetch("http://localhost:5000/api/dashboard")
     .then((res) => res.json())
     .then((data) => {
       const formatted = data.map((b) => ({
@@ -18,10 +18,10 @@ export default function Dashboard() {
         section: b.section,
         category: b.category,
         stockAdded: b.stock,
-        issued: 0,
-        stockLeft: b.stock,
-        totalIssued: 0,
-        totalFine: 0,
+        issued: b.totalFine || 0,
+        stockLeft: b.stock - (b.currentlyIssued || 0),
+        totalIssued: b.totalIssued || 0,
+        totalFine: b.totalFine || 0,
         admin: "Admin",
         date: new Date().toISOString().split("T")[0],
       }));
@@ -38,10 +38,10 @@ export default function Dashboard() {
       (dateFilter === "" || b.date === dateFilter)
   );
 
-  const sections = ["All", "Fiction", "Non-Fiction", "Study"];
+  const sections = ["All", "Fiction", "Non Fiction", "Study"];
   const categories = {
     Fiction: ["All", "Fantasy", "Mystery", "Romance", "Thriller", "Historical", "Children", "Cook"],
-    "Non-Fiction": ["All", "Biography", "Selfhelp", "History", "Science", "Philosophy", "Travel", "Truecrime"],
+    "Non-Fiction": ["All", "Biography", "Self Help", "History", "Science", "Philosophy", "Travel", "Truecrime"],
     Study: ["All", "Mathematics", "Economics", "Physics", "Chemistry", "Biology", "Engineering", "Law"],
   };
 
