@@ -278,6 +278,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Records.css'; // We are adding this to fix the layout!
 
+
 const Records = () => {
     const [sections, setSections] = useState([]);
     const [categories, setCategories] = useState([]);
@@ -317,65 +318,119 @@ const Records = () => {
     };
 
     return (
-        <div className="records-container">
-            <div className="form-card">
-                <h2>Add New Book Record</h2>
-                <form onSubmit={handleSave} className="records-form">
-                    
-                    <div className="form-group">
-                        <label>Book Title</label>
-                        <input type="text" placeholder="Enter book title" value={formData.title} onChange={e => setFormData({...formData, title: e.target.value})} required />
-                    </div>
-                    
-                    {/* The Dependent Dropdowns */}
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label>Section</label>
-                            <select 
-                                value={formData.section_id} 
-                                onChange={e => setFormData({...formData, section_id: e.target.value, category_id: ''})} 
-                                required
-                            >
-                                <option value="">-- Select Section --</option>
-                                {sections.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-                            </select>
-                        </div>
+  <div className="records-page">
+    <div className="records-container">
 
-                        <div className="form-group">
-                            <label>Category</label>
-                            <select 
-                                value={formData.category_id} 
-                                onChange={e => setFormData({...formData, category_id: e.target.value})} 
-                                required 
-                                disabled={!formData.section_id}
-                            >
-                                <option value="">-- Select Category --</option>
-                                {categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-                            </select>
-                        </div>
-                    </div>
+      <h2 className="records-title">Records Management</h2>
+      <p className="records-subtitle">
+        Add new books to the catalog or remove existing records.
+      </p>
 
-                    <div className="form-row">
-                        <div className="form-group">
-                            <label>Author</label>
-                            <input type="text" placeholder="Author name" value={formData.author} onChange={e => setFormData({...formData, author: e.target.value})} />
-                        </div>
-                        <div className="form-group">
-                            <label>Publisher</label>
-                            <input type="text" placeholder="Publisher name" value={formData.publisher} onChange={e => setFormData({...formData, publisher: e.target.value})} />
-                        </div>
-                    </div>
+      <div className="record-card">
+        <form onSubmit={handleSave} className="record-form">
 
-                    <div className="form-group">
-                        <label>Total Stock</label>
-                        <input type="number" min="1" value={formData.stock} onChange={e => setFormData({...formData, stock: e.target.value})} required />
-                    </div>
+          <div className="form-header">
+            <h3>Add New Record</h3>
+            <p>Enter the details to catalog a new book.</p>
+          </div>
 
-                    <button type="submit" className="submit-btn">Save to Library</button>
-                </form>
+          {/* Title */}
+          <div className="form-group full">
+            <label>Title</label>
+            <input
+              type="text"
+              placeholder="e.g. The Lord of the Rings"
+              value={formData.title}
+              onChange={e => setFormData({ ...formData, title: e.target.value })}
+              required
+            />
+          </div>
+
+          {/* Author + Publisher */}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Author</label>
+              <input
+                type="text"
+                placeholder="e.g. J.R.R. Tolkien"
+                value={formData.author}
+                onChange={e => setFormData({ ...formData, author: e.target.value })}
+              />
             </div>
-        </div>
-    );
-};
+
+            <div className="form-group">
+              <label>Publisher (Optional)</label>
+              <input
+                type="text"
+                placeholder="e.g. Allen & Unwin"
+                value={formData.publisher}
+                onChange={e => setFormData({ ...formData, publisher: e.target.value })}
+              />
+            </div>
+          </div>
+
+          {/* Section + Category */}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Section</label>
+              <select
+                value={formData.section_id}
+                onChange={e =>
+                  setFormData({
+                    ...formData,
+                    section_id: e.target.value,
+                    category_id: ""
+                  })
+                }
+                required
+              >
+                <option value="">Select a section</option>
+                {sections.map(s => (
+                  <option key={s.id} value={s.id}>{s.name}</option>
+                ))}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>Category</label>
+              <select
+                value={formData.category_id}
+                onChange={e =>
+                  setFormData({ ...formData, category_id: e.target.value })
+                }
+                disabled={!formData.section_id}
+                required
+              >
+                <option value="">Select a category</option>
+                {categories.map(c => (
+                  <option key={c.id} value={c.id}>{c.name}</option>
+                ))}
+              </select>
+            </div>
+          </div>
+
+          {/* Stock */}
+          <div className="form-group">
+            <label>Initial Stock</label>
+            <input
+              type="number"
+              min="1"
+              value={formData.stock}
+              onChange={e => setFormData({ ...formData, stock: e.target.value })}
+              required
+            />
+          </div>
+
+          {/* Button */}
+          <div className="form-actions">
+            <button type="submit">Add Book Record</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+)
+}
 
 export default Records;

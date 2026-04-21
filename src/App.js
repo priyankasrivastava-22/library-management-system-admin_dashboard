@@ -29,14 +29,18 @@ function App() {
   };
 
   return (
-    <div className={`app ${theme}`}>
-      <Sidebar setActivePage={setActivePage} />
-      <div className="main-content">
-        <Topbar theme={theme} toggleTheme={toggleTheme} />
-        <div className="page-content">{renderPage()}</div>
+  <div className={`app ${theme}`}>
+    <Sidebar setActivePage={setActivePage} />
+
+    <div className="main-section">
+      <Topbar theme={theme} toggleTheme={toggleTheme} />
+
+      <div className="page-content">
+        {renderPage()}
       </div>
     </div>
-  );
+  </div>
+);
 }
 
 export default App;

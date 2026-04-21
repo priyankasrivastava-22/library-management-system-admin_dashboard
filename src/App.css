@@ -1,40 +1,47 @@
-/* Ensure the app container allows side-by-side layout */
+/* MAIN LAYOUT */
 .app {
   display: flex;
+  height: 100vh;
   font-family: Arial, sans-serif;
-  min-height: 100vh;
 }
 
-/* 
-   I am setting the margin to 250px to give extra breathing room.
-   If your sidebar is still overlapping, increase this number (e.g., 280px).
-*/
-.main-content {
-  margin-left: 250px; 
+/* SIDEBAR SPACE CONTROLLED HERE */
+.sidebar {
+  width: 240px;
+  min-width: 240px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+}
+
+/* MAIN SECTION */
+.main-section {
   flex: 1;
-  min-height: 100vh;
-  background: var(--bg);
-  color: var(--text);
-  transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  width: calc(100% - 250px); /* This forces the content to stay within bounds */
+  background: #f9fafb;
 }
 
-/* Themes */
+/* TOPBAR SPACE */
+.page-content {
+  padding: 25px 30px;
+  overflow-y: auto;
+}
+
+/* REMOVE THIS PROBLEM */
+.main-content {
+  margin-left: 0;    
+  width: 100%;        
+}
+
+/* THEMES */
 .app.light {
   --bg: #f8f9fa;
-  --text: #000000;
+  --text: #000;
 }
 
 .app.dark {
   --bg: #121212;
-  --text: #f1f1f1;
+  --text: #fff;
 }
 
-/* This is the box where your Records form lives */
-.page-content {
-  padding: 40px; /* Increased padding to push the form away from edges */
-  display: flex;
-  justify-content: center; /* Centers the form horizontally in the available space */
-}
+

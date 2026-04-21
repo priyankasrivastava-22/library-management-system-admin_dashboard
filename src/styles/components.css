@@ -1,54 +1,71 @@
-/* Sidebar */
+/* Sidebar container fixed on left with improved spacing and background */
 .sidebar {
-  width: 220px;
-  height: 100vh;
-  background: #222;
-  color: white;
-  padding: 15px;
-  position: fixed;
+  width: 180px;
+  height: 80vh;
+  background: #1f2937; /* slightly refined dark shade */
+  color: rgb(149, 27, 27);
+  padding: 10px;  /* increased padding for better spacing */
+  position: relative;
   top: 0;
   left: 0;
 }
+
+/* Sidebar logo styling for better visibility */
 .sidebar .logo {
   font-size: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  font-weight: 600;
 }
+
+/* Sidebar list reset */
 .sidebar ul {
   list-style: none;
   padding: 0;
 }
+
+/* Sidebar list items styling */
 .sidebar ul li {
   padding: 12px;
-  margin: 5px 0;
+  margin: 6px 0;
   cursor: pointer;
-  background: #333;
+  background: #374151; /* cleaner dark tone */
   border-radius: 8px;
-  transition: 0.3s;
-}
-.sidebar ul li:hover {
-  background: #555;
+  transition: all 0.2s ease;
 }
 
-/* Topbar */
+/* Sidebar hover effect */
+.sidebar ul li:hover {
+  background: #4b5563; /* smoother hover */
+  transform: translateX(3px); /* slight movement for interaction */
+}
+
+/* Topbar base styling */
 .topbar {
   height: 60px;
-  background: #f4f4f4;
+  background: #f9fafb; /* cleaner light background */
   display: flex;
   justify-content: flex-end;
   align-items: center;
   padding: 0 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* subtle shadow */
 }
+
+/* Topbar actions container */
 .topbar .actions {
   display: flex;
   align-items: center;
   gap: 15px;
 }
+
+/* Theme button styling */
 .theme-btn {
   padding: 6px 12px;
   border: none;
   border-radius: 6px;
   cursor: pointer;
 }
+
+/* Profile circle styling */
 .profile {
   width: 35px;
   height: 35px;
@@ -59,56 +76,59 @@
   align-items: center;
   color: white;
 }
+
+/* Main topbar container layout */
 .topbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
+  padding: 12px 20px;
   background-color: #1f2937;
   color: white;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
-/* Left */
+/* Left side title styling */
 .topbar-left h2 {
   margin: 0;
   font-size: 20px;
 }
 
-/* Center */
+/* Center container for search */
 .topbar-center {
-  flex: 1; /* take remaining space */
+  flex: 1;
   display: flex;
-  justify-content: center; /* center search box horizontally */
-  margin: 0 20px; /* spacing from left/right */
+  justify-content: center;
+  margin: 0 20px;
 }
 
-/* Search Box */
+/* Search box styling */
 .topbar-search {
-  padding: 6px 10px;
+  padding: 8px 12px; /* improved padding */
   border-radius: 8px;
   border: none;
-  width: 300px; /* fixed width */
+  width: 320px; /* slightly wider */
   max-width: 100%;
   font-size: 14px;
 }
 
-/* Right */
+/* Right side icons container */
 .topbar-right {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-
+/* Duplicate search styling kept but improved */
 .topbar-search {
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 8px;
   border: none;
-  width: 300px; /* wider for visibility */
+  width: 320px;
   font-size: 14px;
 }
 
+/* Theme toggle button styling */
 .theme-toggle {
   background: none;
   border: none;
@@ -117,24 +137,87 @@
   color: white;
 }
 
+/* Profile icon styling */
 .profile-icon {
   font-size: 20px;
   cursor: pointer;
 }
 
-/* src/components/components.css */
-.page { padding: 20px; font-family: Arial, sans-serif; background: var(--bg); color: var(--text); }
-.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-.top-controls { display: flex; gap: 10px; }
-.btn { padding: 5px 10px; cursor: pointer; background: #4CAF50; color: #fff; border: none; border-radius: 4px; }
-.btn-secondary { background: #ccc; color: #333; }
+/* Page base styling for admin pages */
+.page { 
+  padding: 20px; 
+  font-family: Arial, sans-serif; 
+  background: var(--bg); 
+  color: var(--text); 
+}
 
-.data-table { width: 100%; border-collapse: collapse; }
-.data-table th, .data-table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-.data-table th { background: #f2f2f2; position: relative; }
-.data-table tr:nth-child(even){background-color: #f9f9f9;}
-.data-table tr:hover {background-color: #f1f1f1;}
+/* Page header layout */
+.page-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  margin-bottom: 20px; 
+}
 
+/* Top controls container */
+.top-controls { 
+  display: flex; 
+  gap: 10px; 
+}
+
+/* Primary button styling */
+.btn { 
+  padding: 6px 12px; 
+  cursor: pointer; 
+  background: #4CAF50; 
+  color: #fff; 
+  border: none; 
+  border-radius: 4px; 
+  transition: 0.2s;
+}
+
+/* Secondary button styling */
+.btn-secondary { 
+  background: #ccc; 
+  color: #333; 
+}
+
+/* Button hover effect */
+.btn:hover {
+  opacity: 0.9;
+}
+
+/* Table styling */
+.data-table { 
+  width: 100%; 
+  border-collapse: collapse; 
+}
+
+/* Table cells styling */
+.data-table th, .data-table td { 
+  border: 1px solid #ddd; 
+  padding: 10px; 
+  text-align: left; 
+}
+
+/* Table header styling */
+.data-table th { 
+  background: #f3f4f6; 
+  position: relative; 
+  font-weight: 600;
+}
+
+/* Alternate row coloring */
+.data-table tr:nth-child(even){
+  background-color: #f9fafb;
+}
+
+/* Row hover effect */
+.data-table tr:hover {
+  background-color: #eef2ff;
+}
+
+/* Modal overlay styling */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -145,9 +228,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999; /* VERY IMPORTANT */
+  z-index: 9999;
 }
 
+/* Modal box styling */
 .modal-box {
   background: white;
   padding: 25px;
@@ -158,6 +242,7 @@
   position: relative;
 }
 
+/* Modal buttons container */
 .modal-buttons {
   display: flex;
   justify-content: flex-end;
@@ -165,10 +250,99 @@
   margin-top: 20px;
 }
 
+/* Modal buttons cursor */
 .btn-submit, .btn-cancel {
   cursor: pointer;
 }
 
+/* Input and select common styling */
+select { 
+  padding:6px; 
+  border-radius:4px; 
+  border:1px solid #ccc; 
+}
 
-select { padding:5px; border-radius:4px; border:1px solid #ccc; }
-input[type=text], input[type=number], input[type=date] { padding:5px; border-radius:4px; border:1px solid #ccc; width:100%; }
+/* Text and number inputs styling */
+input[type=text], input[type=number], input[type=date] { 
+  padding:6px; 
+  border-radius:4px; 
+  border:1px solid #ccc; 
+  width:100%; 
+}
+
+/* Admin profile wrapper for dropdown */
+.admin-profile-wrapper {
+  position: relative;
+}
+
+/* Admin dropdown menu styling */
+.admin-dropdown {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: #1f2937;
+  color: white;
+  border-radius: 8px;
+  width: 180px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
+  z-index: 2000;
+  overflow: hidden;
+}
+
+/* Admin menu item styling */
+.admin-menu-item {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* Admin menu hover effect */
+.admin-menu-item:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+
+.logo {
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.menu {
+  padding: 10px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #374151;
+}
+
+.menu-item:hover {
+  background: #f3f4f6;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 15px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background: #1f3a5f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

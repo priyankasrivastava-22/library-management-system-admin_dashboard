@@ -6,6 +6,8 @@ export default function Dashboard() {
   const [sectionFilter, setSectionFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
   const [dateFilter, setDateFilter] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+const recordsPerPage = 5;
 
  useEffect(() => {
   fetch("http://localhost:5000/api/dashboard")
@@ -37,6 +39,12 @@ export default function Dashboard() {
       (categoryFilter === "All" || b.category === categoryFilter) &&
       (dateFilter === "" || b.date === dateFilter)
   );
+  const indexOfLast = currentPage * recordsPerPage;
+const indexOfFirst = indexOfLast - recordsPerPage;
+
+const currentBooks = filteredBooks.slice(indexOfFirst, indexOfLast);
+
+const totalPages = Math.ceil(filteredBooks.length / recordsPerPage);
 
   const sections = ["All", "Fiction", "Non Fiction", "Study"];
   const categories = {
@@ -57,21 +65,21 @@ export default function Dashboard() {
       <div className="section-category-filters">
         <div className="filter-group">
           <label>Section</label>
-          <select value={sectionFilter} onChange={(e) => { setSectionFilter(e.target.value); setCategoryFilter("All"); }}>
+          <select value={sectionFilter} onChange={(e) => { setSectionFilter(e.target.value);setCategoryFilter("All");setCurrentPage(1);   }}>
             {sections.map((s) => <option key={s}>{s}</option>)}
           </select>
         </div>
 
         <div className="filter-group">
           <label>Category</label>
-          <select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
+          <select value={categoryFilter} onChange={(e) => {setCategoryFilter(e.target.value);setCurrentPage(1);  }}>
             {(categories[sectionFilter] || ["All"]).map((c) => <option key={c}>{c}</option>)}
           </select>
         </div>
 
         <div className="filter-group">
           <label>Date</label>
-          <input type="date" value={dateFilter} onChange={(e) => setDateFilter(e.target.value)} />
+          <input type="date" value={dateFilter} onChange={(e) => {setDateFilter(e.target.value);setCurrentPage(1);  }} />
         </div>
       </div>
 
@@ -93,7 +101,7 @@ export default function Dashboard() {
             </tr>
           </thead>
           <tbody>
-            {filteredBooks.map((b) => (
+            {currentBooks.map((b) => (
               <tr key={b.id}>
                 <td>{b.id}</td>
                 <td>{b.name}</td>
@@ -112,6 +120,24 @@ export default function Dashboard() {
           </tbody>
         </table>
       </div>
+
+      <div className="pagination">
+  <button 
+    disabled={currentPage === 1}
+    onClick={() => setCurrentPage(currentPage - 1)}
+  >
+    Prev
+  </button>
+
+  <span>Page {currentPage} of {totalPages}</span>
+
+  <button 
+    disabled={currentPage === totalPages}
+    onClick={() => setCurrentPage(currentPage + 1)}
+  >
+    Next
+  </button>
+</div>
     </div>
   );
 }

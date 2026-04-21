@@ -1,17 +1,57 @@
 import React from "react";
-import "../styles/components.css";
+import {
+  FaHome,
+  FaBook,
+  FaLayerGroup,
+  FaClipboardList,
+  FaExchangeAlt,
+  FaUsers
+} from "react-icons/fa";
 
 function Sidebar({ setActivePage }) {
   return (
     <div className="sidebar">
-      <h2 className="logo">Admin Panel</h2>
-      <ul>
-        <li onClick={() => setActivePage("dashboard")}>Dashboard</li>
-        <li onClick={() => setActivePage("fiction")}>Fiction</li>
-        <li onClick={() => setActivePage("nonfiction")}>Non-Fiction</li>
-        <li onClick={() => setActivePage("study")}>Study</li>
-        <li onClick={() => setActivePage("records")}>Records</li>
-      </ul>
+
+      <div className="logo">Athenaeum</div>
+
+      <div className="menu">
+        <div className="menu-item" onClick={() => setActivePage("dashboard")}>
+          <FaHome /> Dashboard
+        </div>
+
+        <div className="menu-item" onClick={() => setActivePage("fiction")}>
+          <FaBook /> Fiction
+        </div>
+
+        <div className="menu-item" onClick={() => setActivePage("nonfiction")}>
+          <FaLayerGroup /> Non-Fiction
+        </div>
+
+        <div className="menu-item" onClick={() => setActivePage("study")}>
+          <FaBook /> Study
+        </div>
+
+        <div className="menu-item" onClick={() => setActivePage("records")}>
+          <FaClipboardList /> Records (CRUD)
+        </div>
+
+        <div className="menu-item">
+          <FaExchangeAlt /> Transactions
+        </div>
+
+        <div className="menu-item">
+          <FaUsers /> Users
+        </div>
+      </div>
+
+      <div className="sidebar-footer">
+        <div className="avatar">LA</div>
+        <div>
+          <div>Lead Admin</div>
+          <small>admin@athenaeum.edu</small>
+        </div>
+      </div>
+
     </div>
   );
 }
