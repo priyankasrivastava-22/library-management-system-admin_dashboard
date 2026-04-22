@@ -1,223 +1,187 @@
-/* Sidebar container fixed on left with improved spacing and background */
+/* ================= SIDEBAR ================= */
+/* SIDEBAR FIXED */
 .sidebar {
-  width: 180px;
-  height: 80vh;
-  background: #1f2937; /* slightly refined dark shade */
-  color: rgb(149, 27, 27);
-  padding: 10px;  /* increased padding for better spacing */
-  position: relative;
+  width: 250px;
+  height: 100vh;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  position: fixed; /* FIXED sidebar */
   top: 0;
   left: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Sidebar logo styling for better visibility */
-.sidebar .logo {
+/* LOGO */
+.logo {
+  padding: 20px;
   font-size: 20px;
-  margin-bottom: 20px;
   font-weight: 600;
+  border-bottom: 1px solid #e5e7eb;
 }
 
-/* Sidebar list reset */
-.sidebar ul {
-  list-style: none;
-  padding: 0;
+/* MENU */
+.menu {
+  flex: 1;
+  padding: 15px;
 }
 
-/* Sidebar list items styling */
-.sidebar ul li {
-  padding: 12px;
-  margin: 6px 0;
-  cursor: pointer;
-  background: #374151; /* cleaner dark tone */
+/* MENU ITEM */
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
   border-radius: 8px;
-  transition: all 0.2s ease;
-}
-
-/* Sidebar hover effect */
-.sidebar ul li:hover {
-  background: #4b5563; /* smoother hover */
-  transform: translateX(3px); /* slight movement for interaction */
-}
-
-/* Topbar base styling */
-.topbar {
-  height: 60px;
-  background: #f9fafb; /* cleaner light background */
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.05); /* subtle shadow */
-}
-
-/* Topbar actions container */
-.topbar .actions {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-/* Theme button styling */
-.theme-btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
   cursor: pointer;
+  color: #374151;
+  transition: 0.2s;
 }
 
-/* Profile circle styling */
-.profile {
+/* HOVER */
+.menu-item:hover {
+  background: #f3f4f6;
+}
+
+/* FOOTER */
+.sidebar-footer {
+  padding: 15px;
+  border-top: 1px solid #e5e7eb;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+/* AVATAR */
+.avatar {
   width: 35px;
   height: 35px;
-  background: gray;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: #1f3a5f;
   color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Main topbar container layout */
-.topbar-container {
+/* ================= TOPBAR ================= */
+
+.topbar {
+  height: 60px;
+  background: #480fc252;
+  border-bottom: 1px solid #e5e7eb;
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  align-items: center;
-  padding: 12px 20px;
-  background-color: #1f2937;
-  color: white;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 0 20px;
 }
 
-/* Left side title styling */
+/* LEFT TITLE */
 .topbar-left h2 {
-  margin: 0;
   font-size: 20px;
+  font-weight: 600;
+  margin: 0;
 }
 
-/* Center container for search */
-.topbar-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  margin: 0 20px;
-}
-
-/* Search box styling */
 .topbar-search {
-  padding: 8px 12px; /* improved padding */
+  width: 350px;
+  padding: 8px 12px;
   border-radius: 8px;
-  border: none;
-  width: 320px; /* slightly wider */
-  max-width: 100%;
-  font-size: 14px;
+  border: 1px solid #ccc;
 }
 
-/* Right side icons container */
+/* RIGHT */
 .topbar-right {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* Duplicate search styling kept but improved */
-.topbar-search {
-  padding: 8px 12px;
-  border-radius: 8px;
-  border: none;
-  width: 320px;
-  font-size: 14px;
-}
-
-/* Theme toggle button styling */
-.theme-toggle {
+/* ICON BUTTON */
+.icon-btn {
   background: none;
   border: none;
   font-size: 18px;
   cursor: pointer;
-  color: white;
 }
 
-/* Profile icon styling */
-.profile-icon {
-  font-size: 20px;
+/* DROPDOWN */
+.admin-dropdown {
+  position: absolute;
+  right: 0;
+  top: 45px;
+  background: rgb(253, 244, 244);
+  color: black;
+  border-radius: 8px;
+  width: 160px;
+  box-shadow: 0px 4px 12px rgba(0,0,0,0.2);
+}
+
+.admin-menu-item {
+  padding: 10px;
   cursor: pointer;
 }
 
-/* Page base styling for admin pages */
-.page { 
-  padding: 20px; 
-  font-family: Arial, sans-serif; 
-  background: var(--bg); 
-  color: var(--text); 
+.admin-menu-item:hover {
+  background: #f3f4f6;
 }
 
-/* Page header layout */
-.page-header { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  margin-bottom: 20px; 
+/* ================= PAGE ================= */
+
+.page {
+  padding: 20px;
+  font-family: Arial, sans-serif;
 }
 
-/* Top controls container */
-.top-controls { 
-  display: flex; 
-  gap: 10px; 
+/* ================= BUTTONS ================= */
+
+.btn {
+  padding: 6px 12px;
+  cursor: pointer;
+  background: #4CAF50;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
 }
 
-/* Primary button styling */
-.btn { 
-  padding: 6px 12px; 
-  cursor: pointer; 
-  background: #4CAF50; 
-  color: #fff; 
-  border: none; 
-  border-radius: 4px; 
-  transition: 0.2s;
+.btn-secondary {
+  background: #ccc;
+  color: #333;
 }
 
-/* Secondary button styling */
-.btn-secondary { 
-  background: #ccc; 
-  color: #333; 
-}
-
-/* Button hover effect */
 .btn:hover {
   opacity: 0.9;
 }
 
-/* Table styling */
-.data-table { 
-  width: 100%; 
-  border-collapse: collapse; 
+/* ================= TABLE ================= */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-/* Table cells styling */
-.data-table th, .data-table td { 
-  border: 1px solid #ddd; 
-  padding: 10px; 
-  text-align: left; 
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
 }
 
-/* Table header styling */
-.data-table th { 
-  background: #f3f4f6; 
-  position: relative; 
+.data-table th {
+  background: #f3f4f6;
   font-weight: 600;
 }
 
-/* Alternate row coloring */
-.data-table tr:nth-child(even){
+.data-table tr:nth-child(even) {
   background-color: #f9fafb;
 }
 
-/* Row hover effect */
 .data-table tr:hover {
   background-color: #eef2ff;
 }
 
-/* Modal overlay styling */
+/* ================= MODAL ================= */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -231,118 +195,28 @@
   z-index: 9999;
 }
 
-/* Modal box styling */
 .modal-box {
   background: white;
   padding: 25px;
   border-radius: 12px;
   width: 400px;
   max-width: 90%;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  position: relative;
 }
 
-/* Modal buttons container */
 .modal-buttons {
   display: flex;
   justify-content: flex-end;
   gap: 10px;
-  margin-top: 20px;
 }
 
-/* Modal buttons cursor */
-.btn-submit, .btn-cancel {
-  cursor: pointer;
-}
+/* ================= INPUTS ================= */
 
-/* Input and select common styling */
-select { 
-  padding:6px; 
-  border-radius:4px; 
-  border:1px solid #ccc; 
-}
-
-/* Text and number inputs styling */
-input[type=text], input[type=number], input[type=date] { 
-  padding:6px; 
-  border-radius:4px; 
-  border:1px solid #ccc; 
-  width:100%; 
-}
-
-/* Admin profile wrapper for dropdown */
-.admin-profile-wrapper {
-  position: relative;
-}
-
-/* Admin dropdown menu styling */
-.admin-dropdown {
-  position: absolute;
-  right: 0;
-  top: 45px;
-  background: #1f2937;
-  color: white;
-  border-radius: 8px;
-  width: 180px;
-  box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
-  z-index: 2000;
-  overflow: hidden;
-}
-
-/* Admin menu item styling */
-.admin-menu-item {
-  padding: 10px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-/* Admin menu hover effect */
-.admin-menu-item:hover {
-  background: rgba(255,255,255,0.1);
-}
-
-
-.logo {
-  padding: 20px;
-  font-size: 18px;
-  font-weight: 600;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.menu {
-  padding: 10px;
-}
-
-.menu-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 15px;
+select,
+input[type=text],
+input[type=number],
+input[type=date] {
+  padding: 8px;
   border-radius: 6px;
-  cursor: pointer;
-  color: #374151;
-}
-
-.menu-item:hover {
-  background: #f3f4f6;
-}
-
-.sidebar-footer {
-  margin-top: auto;
-  padding: 15px;
-  border-top: 1px solid #e5e7eb;
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background: #1f3a5f;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border: 1px solid #ccc;
+  width: 100%;
 }

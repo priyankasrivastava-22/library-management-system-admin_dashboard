@@ -1,36 +1,22 @@
-/* MAIN LAYOUT */
 .app {
   display: flex;
-  height: 100vh;
   font-family: Arial, sans-serif;
-}
-
-/* SIDEBAR SPACE CONTROLLED HERE */
-.sidebar {
-  width: 240px;
-  min-width: 240px;
-  background: #ffffff;
-  border-right: 1px solid #e5e7eb;
 }
 
 /* MAIN SECTION */
 .main-section {
-  flex: 1;
+  margin-left: 250px; /* EXACT sidebar width */
+  width: calc(100% - 250px);
   display: flex;
   flex-direction: column;
-  background: #f9fafb;
+  min-height: 100vh;
 }
 
-/* TOPBAR SPACE */
+/* PAGE CONTENT */
 .page-content {
-  padding: 25px 30px;
-  overflow-y: auto;
-}
-
-/* REMOVE THIS PROBLEM */
-.main-content {
-  margin-left: 0;    
-  width: 100%;        
+  padding: 25px;
+  background: #f9fafb;
+  min-height: calc(100vh - 60px);
 }
 
 /* THEMES */
@@ -43,5 +29,3 @@
   --bg: #121212;
   --text: #fff;
 }
-
-

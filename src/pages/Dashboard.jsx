@@ -60,7 +60,6 @@ const totalPages = Math.ceil(filteredBooks.length / recordsPerPage);
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Admin Dashboard</h1>
 
       <div className="section-category-filters">
         <div className="filter-group">

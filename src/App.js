@@ -17,6 +17,8 @@ function App() {
 
   const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
+  <Topbar theme={theme} toggleTheme={toggleTheme} activePage={activePage}/>
+
   const renderPage = () => {
     switch (activePage) {
       case "dashboard": return <Dashboard />;
@@ -33,7 +35,7 @@ function App() {
     <Sidebar setActivePage={setActivePage} />
 
     <div className="main-section">
-      <Topbar theme={theme} toggleTheme={toggleTheme} />
+        <Topbar theme={theme} toggleTheme={toggleTheme} activePage={activePage}/>
 
       <div className="page-content">
         {renderPage()}

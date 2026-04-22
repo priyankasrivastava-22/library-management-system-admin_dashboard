@@ -12,7 +12,7 @@ function Sidebar({ setActivePage }) {
   return (
     <div className="sidebar">
 
-      <div className="logo">Athenaeum</div>
+      <div className="logo">Admin Panel</div>
 
       <div className="menu">
         <div className="menu-item" onClick={() => setActivePage("dashboard")}>
